@@ -2,8 +2,7 @@
 
 class Roman
   def convert(int)
-    array_of_digits = int.to_s.split('').reverse.each_with_index.map { |number, index| number.to_i * (10 ** index) }.reverse
-    array_of_digits.map do |unit|
+    digits(int).map do |unit|
       numeral_for_int(unit)
     end.join
   end
@@ -21,6 +20,10 @@ class Roman
   }.freeze
 
   NUMBERS_LARGE_TO_SMALL = NUMERAL_VALUES.keys.sort.reverse.freeze
+
+  def digits(int)
+    int.to_s.split('').reverse.each_with_index.map { |number, index| number.to_i * (10 ** index) }.reverse
+  end
 
   def numeral_for_int(unit)
     return if unit.zero?
